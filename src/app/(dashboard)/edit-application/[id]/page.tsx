@@ -1,5 +1,5 @@
-import ApplicationDetails from "./_components/ApplicationDetails";
+import EditApplicationForm from "./_components/EditApplicationForm";
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
  const { id } = await params;
- return <ApplicationDetails id={id} />;
+ return <EditApplicationForm id={id} />;
 }

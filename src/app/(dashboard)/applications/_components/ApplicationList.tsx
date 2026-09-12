@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Eye, Search } from "lucide-react";
+import { Eye, Pencil, Plus, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -13,12 +13,15 @@ import {
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import Pagenation from "@/components/pagenation/Pagenation";
 import { useReviews } from "../review-store";
-import { applications, badgeClass } from "../data";
+import { useApplications } from "../application-store";
+import { Button } from "@/components/ui/button";
+import { badgeClass } from "../data";
 export default function ApplicationList() {
   const [tab, setTab] = useState("All");
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const reviews = useReviews();
+  const applications = useApplications();
   const rows = applications
     .map((a) => ({ ...a, status: reviews[a.id]?.status || a.status }))
     .filter(
@@ -42,6 +45,7 @@ export default function ApplicationList() {
             className="h-11 border-[#CDDCDA] pl-9"
           />
         </div>
+        <div className="flex w-full flex-wrap items-center gap-3 sm:ml-auto sm:w-auto">
         <Select
           value={tab}
           onValueChange={(value) => {
@@ -69,6 +73,8 @@ export default function ApplicationList() {
             )}
           </SelectContent>
         </Select>
+        <Button asChild className="h-11 cursor-pointer bg-[#003B3B] text-white hover:bg-[#00504D]"><Link href="/add-application"><Plus className="size-4" aria-hidden="true" />Add Application</Link></Button>
+        </div>
       </div>
       <div className="overflow-x-auto rounded-lg border border-[#E3EAE7] bg-white">
         <table className="w-full min-w-[800px] text-left text-[13px]">
@@ -122,6 +128,7 @@ export default function ApplicationList() {
                   </td>
                 ))}
                 <td className="px-4 py-3.5">
+                  <div className="flex items-center gap-2">
                   <Link
                     href={`/applications/${a.id}`}
                     aria-label={`View ${a.name}'s application`}
@@ -129,6 +136,10 @@ export default function ApplicationList() {
                   >
                     <Eye className="size-4" />
                   </Link>
+                  <Link href={`/edit-application/${a.id}`} aria-label={`Edit ${a.name}'s application`} title="Edit application" className="flex size-9 cursor-pointer items-center justify-center rounded-md border border-[#C8DCD6] bg-[#EDF5F2] text-[#00504D] hover:bg-[#DDEAE6]">
+                    <Pencil className="size-4" />
+                  </Link>
+                  </div>
                 </td>
               </tr>
             ))}
