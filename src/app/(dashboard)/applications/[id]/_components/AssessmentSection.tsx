@@ -17,14 +17,14 @@ export default function AssessmentSection({ step, answers, onAnswer }: Props) {
   const section = sections[step];
   function table(t: AssessmentTable) {
     return (
-      <div className="space-y-3">
+      <div className="space-y-4 rounded-lg bg-[#E8EEEE] px-5 py-7 sm:px-6">
         <p className="text-sm font-medium">{t.title}</p>
-        <div className="overflow-x-auto rounded-lg border border-[#E0E7E5]">
-          <table className="w-full min-w-[440px] text-left text-xs">
+        <div className="overflow-x-auto rounded-lg border border-[#D4DEDC] bg-[#F7FAF9]">
+          <table className="w-full min-w-[440px] text-left text-sm">
             <thead className="bg-[#E8EEEE] text-[#526361]">
               <tr>
                 {t.headers.map((h) => (
-                  <th key={h} className="px-3 py-3 font-medium">
+                  <th key={h} className="px-4 py-3.5 font-medium">
                     {h}
                   </th>
                 ))}
@@ -37,7 +37,7 @@ export default function AssessmentSection({ step, answers, onAnswer }: Props) {
                   className={`border-t border-[#E7ECEA] ${t.kind === "profit" && (i === 3 || i === 13) ? "bg-[#FBECE7] text-[#D85432]" : ""}`}
                 >
                   {row.map((cell, j) => (
-                    <td key={j} className="px-3 py-3">
+                    <td key={j} className="px-4 py-3.5">
                       {cell}
                     </td>
                   ))}
@@ -46,7 +46,7 @@ export default function AssessmentSection({ step, answers, onAnswer }: Props) {
                     (_, j) => {
                       const key = `${step}-table-${i}-${j}`;
                       return (
-                        <td key={j} className="px-3 py-2">
+                        <td key={j} className="px-4 py-3">
                           {["accounts", "debits"].includes(t.kind) ? (
                             <Select
                               value={answers[key] || ""}
@@ -54,7 +54,7 @@ export default function AssessmentSection({ step, answers, onAnswer }: Props) {
                             >
                               <SelectTrigger
                                 aria-label={`${row.join(" ")} ${t.headers[row.length + j]}`}
-                                className="w-full min-w-32 cursor-pointer rounded-sm bg-[#E8EEEE] text-xs"
+                                className="h-11! w-full min-w-32 cursor-pointer rounded-md border-[#D4DEDC] bg-transparent text-sm"
                               >
                                 <SelectValue placeholder="– select –" />
                               </SelectTrigger>
@@ -85,7 +85,7 @@ export default function AssessmentSection({ step, answers, onAnswer }: Props) {
                               aria-label={`${row[0]} ${t.headers[row.length + j]}`}
                               value={answers[key] || ""}
                               onChange={(e) => onAnswer(key, e.target.value)}
-                              className="h-8 min-w-24 rounded-sm bg-[#E8EEEE] text-xs"
+                              className="h-11 min-w-24 rounded-md border-[#D4DEDC] bg-transparent text-sm shadow-none"
                               placeholder={
                                 t.kind === "industry"
                                   ? "Enter accounts…"
@@ -111,17 +111,17 @@ export default function AssessmentSection({ step, answers, onAnswer }: Props) {
     );
   }
   return (
-    <section className="space-y-5">
+    <section className="space-y-6">
       <h2
         tabIndex={-1}
         id="assessment-heading"
-        className="border-b border-[#E3EAE7] pb-4 text-base font-semibold text-[#00504D]"
+        className="bg-[#003B3B] px-5 py-8 text-center text-xl font-semibold text-white sm:px-10 sm:text-2xl"
       >
         Section {step + 1} — {section.title}
       </h2>
       {section.table && [2, 3, 6].includes(step) && table(section.table)}
       {section.questions.map((q, i) => (
-        <div key={q.id} className="space-y-2">
+        <div key={q.id} className="space-y-3 rounded-lg bg-[#E8EEEE] px-5 py-7 sm:px-6">
           <label htmlFor={q.id} className="block text-sm leading-5">
             <span className="mr-2 font-medium text-[#00504D]">
               Question {q.id}
@@ -138,14 +138,14 @@ export default function AssessmentSection({ step, answers, onAnswer }: Props) {
             value={answers[q.id] || ""}
             onChange={(e) => onAnswer(q.id, e.target.value)}
             placeholder={step === 1 ? "=…" : "Enter your answer here…"}
-            className="min-h-[70px] w-full resize-y rounded-md border border-[#E0E7E5] bg-transparent px-3 py-3 text-sm outline-none placeholder:text-[#829498] focus:border-[#7FA6A3] focus:ring-2 focus:ring-[#7FA6A3]/20"
+            className="min-h-[100px] w-full resize-y rounded-md border border-[#D4DEDC] bg-transparent px-4 py-3.5 text-sm outline-none placeholder:text-[#829498] focus:border-[#7FA6A3] focus:ring-2 focus:ring-[#7FA6A3]/20"
           />
           {step === 7 && i === 0 && section.table && table(section.table)}
         </div>
       ))}
       {section.table && [0, 5].includes(step) && table(section.table)}
       {step === 8 && (
-        <fieldset className="space-y-2">
+        <fieldset className="space-y-3 rounded-lg bg-[#E8EEEE] px-5 py-7 sm:px-6">
           <legend className="mb-3 text-sm">
             Question 9D — Which equation is incorrect? A = Assets, L =
             Liabilities, E = Equity.
@@ -153,7 +153,7 @@ export default function AssessmentSection({ step, answers, onAnswer }: Props) {
           {["A = L + E", "E = A - L", "L = E + A", "L = A - E"].map((v) => (
             <label
               key={v}
-              className="flex cursor-pointer items-center gap-2 rounded-md border border-[#E0E7E5] p-3 text-sm"
+              className="flex cursor-pointer items-center gap-2 rounded-md border border-[#D4DEDC] p-4 text-sm hover:bg-[#DDE7E4]"
             >
               <input
                 type="radio"

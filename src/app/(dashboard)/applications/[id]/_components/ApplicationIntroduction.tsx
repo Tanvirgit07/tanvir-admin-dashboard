@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function ApplicationIntroduction({ application, answers, onAnswer }: Props) {
-  const inputClass = "mt-2 h-10 rounded-md border-[#D4DEDC] bg-transparent text-sm shadow-none placeholder:text-[#829498] focus-visible:ring-[#7FA6A3]/30";
+  const inputClass = "mt-2.5 h-11 rounded-md border-[#D4DEDC] bg-transparent text-sm shadow-none placeholder:text-[#829498] focus-visible:ring-[#7FA6A3]/30";
   return (
     <section className="space-y-5">
       <h2 id="assessment-heading" tabIndex={-1} className="text-base font-medium text-[#153237]">Bookkeeper Application</h2>
@@ -31,13 +31,13 @@ export default function ApplicationIntroduction({ application, answers, onAnswer
           </DialogContent>
         </Dialog>
       </div>
-      <div className="w-full pt-7">
+      <div className="mx-auto w-full pt-7 lg:w-[90%]">
         <div className="bg-[#003B3B] px-5 py-8 text-center text-white sm:px-10">
           <h3 className="text-xl font-semibold sm:text-2xl">Bookkeeping Skills Assessment Answers</h3>
           <p className="mt-2 text-sm font-light text-[#D8E6E3]">Candidate Screening Evaluation | Designed by Theresa McCoy, CPA</p>
         </div>
         <p className="bg-[#E8EEEE] px-5 py-4 text-[11px] leading-4 text-[#356160] sm:px-[10%]"><span className="font-semibold">Instructions:</span> Complete all sections. Show your work where calculations are required. For open-ended questions, write complete, professional sentences. This assessment evaluates foundational bookkeeping skills.</p>
-        <div className="mt-7 grid w-full gap-3 rounded-lg bg-[#E8EEEE] p-4 sm:grid-cols-2">
+        <div className="mt-7 grid w-full gap-x-6 gap-y-6 rounded-lg bg-[#E8EEEE] px-5 py-7 sm:grid-cols-2 sm:px-6">
           <label className="text-xs">Candidate name:<Input className={inputClass} placeholder="Full name" value={answers.candidateName ?? application.name} onChange={e => onAnswer("candidateName", e.target.value)} /></label>
           <label className="text-xs">Date:<Input type="date" className={inputClass} value={answers.candidateDate ?? application.date} onChange={e => onAnswer("candidateDate", e.target.value)} /></label>
           <label className="text-xs">Position applied for:<Input className={inputClass} placeholder="Position title" value={answers.position ?? "Bookkeeper"} onChange={e => onAnswer("position", e.target.value)} /></label>

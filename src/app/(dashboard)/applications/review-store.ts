@@ -1,6 +1,6 @@
 "use client";
 import { useSyncExternalStore } from "react";
-type Review = { answers: Record<string,string>; status?: string };
+type Review = { answers: Record<string,string>; status?: string; trainingCourseId?: string };
 let reviews: Record<string,Review> = {};
 const empty: Record<string,Review> = {};
 const listeners = new Set<() => void>();
