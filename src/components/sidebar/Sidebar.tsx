@@ -28,8 +28,8 @@ import { signOut } from "next-auth/react";
 const navigation = [
   { name: "Dashboard Overview", href: "/", icon: LayoutDashboard },
   {
-    name: "Payments",
-    href: "/payments",
+    name: "User Management",
+    href: "/users-management",
     icon: CreditCard,
   },
   {
@@ -110,7 +110,7 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
   return (
     <>
       {/* Mobile Overlay */}
-      {open && (
+      {open && ( 
         <div
           className="fixed inset-0 bg-black/40 z-40 lg:hidden"
           onClick={() => setOpen(false)}
@@ -119,7 +119,7 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
 
       <div
         className={cn(
-          "fixed lg:sticky top-0 left-0 h-screen w-[280px] lg:w-[320px] bg-[#FAF6EE] z-50 flex flex-col transition-transform duration-300",
+          "fixed lg:sticky top-0 left-0 h-screen w-[280px] lg:w-[320px] bg-[#E8EEEE] text-[#003b3b] z-50 flex flex-col transition-transform duration-300",
           open ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
         )}
       >
@@ -131,12 +131,13 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
         </div>
 
         {/* Logo */}
-        <div className="h-[80px] flex items-center justify-center">
+        <div className="shrink-0 flex items-center justify-center py-6">
           <Image
-            src="/images/logo.png"
-            alt="Logo"
+            src="/images/logo_image.png"
+            alt="Bookkeepers Marketplace"
             width={150}
             height={120}
+            className="h-auto max-h-[72px] w-auto max-w-[150px] object-contain"
             priority
           />
         </div>
@@ -154,16 +155,16 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "flex w-full items-center gap-3 rounded-[8px] px-4 py-[8px] text-sm font-medium transition-all duration-200",
+                  "flex w-full cursor-pointer items-center gap-3 rounded-[8px] border-l-4 border-transparent pl-3 pr-4 py-[8px] text-sm font-medium transition-all duration-200",
                   isActive
-                    ? "bg-[#CD9B46] text-white"
-                    : "text-[#616161] hover:bg-slate-200",
+                    ? "rounded-[4px] border-l-[#3C6E6C] bg-[#003B3B] text-white"
+                    : "text-[#245858] hover:bg-[#DCE6E6]",
                 )}
               >
                 <item.icon
                   className={cn(
                     "h-5 w-5",
-                    isActive ? "text-white" : "text-[#616161]",
+                    isActive ? "text-white" : "text-[#245858]",
                   )}
                 />
 
@@ -182,7 +183,7 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
           <button
             type="button"
             onClick={() => signOut({ callbackUrl: "/login" })}
-            className="group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 cursor-pointer transition-all duration-300 hover:bg-red-50 hover:text-red-600"
+            className="group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#E6470B] cursor-pointer transition-all duration-300 hover:bg-red-50 hover:text-red-600"
           >
             <LogOut className="h-5 w-5 transition-colors duration-300" />
             <span className="text-base">Log Out</span>
