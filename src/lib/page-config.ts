@@ -11,6 +11,10 @@ export const pageConfig: Record<
       "Welcome back! Here's what's happening in valoura travel today.",
   },
 
+  "/applications": {
+    title: "Applications",
+    description: "Review applicant assessments and manage vetting decisions",
+  },
   "/payments": {
     title: "Payments",
     description:
@@ -128,6 +132,9 @@ export const pageConfig: Record<
 };
 
 export const getPageConfig = (pathname: string) => {
+  if (pathname.startsWith("/applications/")) {
+    return { title: "Skill Assessment", description: "Review the application assessment section by section" };
+  }
   // Dynamic Routes
   if (pathname.startsWith("/visa-applications/edit-visa/")) {
     return {

@@ -7,7 +7,6 @@ import {
   Binoculars,
   CalendarRange,
   ClipboardPenLine,
-  CreditCard,
   FolderRoot,
   GraduationCap,
   HousePlus,
@@ -30,8 +29,9 @@ const navigation = [
   {
     name: "User Management",
     href: "/users-management",
-    icon: CreditCard,
+    icon: UserRound,
   },
+  { name: "Applications", href: "/applications", icon: ClipboardPenLine },
   {
     name: "Visa Applications",
     href: "/visa-applications",
@@ -51,11 +51,6 @@ const navigation = [
     name: "Consultation",
     href: "/consultation",
     icon: CalendarRange,
-  },
-  {
-    name: "Users Management",
-    href: "/users-management",
-    icon: UserRound,
   },
   {
     name: "Countries",
@@ -119,13 +114,13 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
 
       <div
         className={cn(
-          "fixed lg:sticky top-0 left-0 h-screen w-[280px] lg:w-[320px] bg-[#E8EEEE] text-[#003b3b] z-50 flex flex-col transition-transform duration-300",
+          "fixed lg:sticky top-0 left-0 h-dvh shrink-0 overflow-hidden w-[280px] lg:w-[320px] bg-[#E8EEEE] text-[#003b3b] z-50 flex flex-col transition-transform duration-300",
           open ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
         )}
       >
         {/* Mobile Close Button */}
         <div className="absolute right-4 top-4 lg:hidden">
-          <button onClick={() => setOpen(false)}>
+          <button className="cursor-pointer" aria-label="Close sidebar" onClick={() => setOpen(false)}>
             <X className="w-6 h-6" />
           </button>
         </div>
@@ -143,7 +138,7 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 space-y-2 flex flex-col items-center px-3 overflow-y-auto mt-3">
+        <nav className="min-h-0 flex-1 space-y-2 flex flex-col items-center px-3 pb-2 overflow-x-hidden overflow-y-auto overscroll-contain mt-3 [scrollbar-width:thin] [scrollbar-color:#9BB7B2_transparent]">
           {navigation.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -155,7 +150,7 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "flex w-full cursor-pointer items-center gap-3 rounded-[8px] border-l-4 border-transparent pl-3 pr-4 py-[8px] text-sm font-medium transition-all duration-200",
+                  "flex w-full shrink-0 cursor-pointer items-center gap-3 rounded-[8px] border-l-4 border-transparent pl-3 pr-4 py-[8px] text-sm font-medium transition-all duration-200",
                   isActive
                     ? "rounded-[4px] border-l-[#3C6E6C] bg-[#003B3B] text-white"
                     : "text-[#245858] hover:bg-[#DCE6E6]",
@@ -163,7 +158,7 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
               >
                 <item.icon
                   className={cn(
-                    "h-5 w-5",
+                    "h-5 w-5 shrink-0",
                     isActive ? "text-white" : "text-[#245858]",
                   )}
                 />
@@ -179,7 +174,7 @@ export function Sidebar({ open, setOpen }: SidebarProps) {
         </nav>
 
         {/* Logout */}
-        <div className="p-6">
+        <div className="shrink-0 p-6">
           <button
             type="button"
             onClick={() => signOut({ callbackUrl: "/login" })}

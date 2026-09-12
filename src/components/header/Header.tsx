@@ -66,7 +66,7 @@ export default function Header({ setSidebarOpen }: HeaderProps) {
           <Menu className="w-6 h-6" />
         </button>
 
-        <div className="lg:ml-[275px]">
+        <div className="lg:ml-[325px]">
           <h1 className="text-2xl font-bold leading-tight tracking-tight text-[#003b3b] md:text-[28px]">
             {pageInfo.title}
           </h1>
